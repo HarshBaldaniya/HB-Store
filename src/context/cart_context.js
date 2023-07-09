@@ -4,7 +4,7 @@ import reducer from "../reducer/cartReducer";
 const CartContext = createContext();
 
 const getLocalCartData = () => {
-  // let localCartData = localStorage.getItem("HBCart");
+  let localCartData = localStorage.getItem("HBCart");
   // if (localCartData === []) {
   //   return [];
   // } else {
