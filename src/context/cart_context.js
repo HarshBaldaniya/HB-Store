@@ -4,12 +4,15 @@ import reducer from "../reducer/cartReducer";
 const CartContext = createContext();
 
 const getLocalCartData = () => {
-  let localCartData = localStorage.getItem("HBCart");
-  if (localCartData === []) {
-    return [];
-  } else {
-    return JSON.parse(localCartData);
-  }
+  // let localCartData = localStorage.getItem("HBCart");
+  // if (localCartData === []) {
+  //   return [];
+  // } else {
+  //   return JSON.parse(localCartData);
+  // }
+  const parsedData = JSON.parse(localCartData);
+  if (!Array.isArray(parsedData)) return [];
+  return parsedData;
 };
 
 const initialState = {
@@ -58,7 +61,16 @@ const CartProvider = ({ children }) => {
   }, [state.cart]);
 
   return (
-    <CartContext.Provider value={{ ...state, addToCart, removeItem, clearCart, setDecrease, setIncrement }}>
+    <CartContext.Provider
+      value={{
+        ...state,
+        addToCart,
+        removeItem,
+        clearCart,
+        setDecrease,
+        setIncrement,
+      }}
+    >
       {children}
     </CartContext.Provider>
   );
