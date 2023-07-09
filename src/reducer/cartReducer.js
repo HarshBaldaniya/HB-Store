@@ -1,51 +1,49 @@
 const cartReducer = (state, action) => {
-  const cartReducer = (state = { cart: [] }, action) => {
-    if (action.type === "ADD_TO_CART") {
-      let { id, color, amount, product } = action.payload;
+  if (action.type === "ADD_TO_CART") {
+    let { id, color, amount, product } = action.payload;
 
-      // tackle the existing product
-      let existingProduct = state.cart.find(
-        (curItem) => curItem.id === id + color
-      );
+    // tackle the existing product
+    let existingProduct = state.cart.find(
+      (curItem) => curItem.id === id + color
+    );
 
-      if (existingProduct) {
-        let updatedProduct = state.cart.map((curElem) => {
-          if (curElem.id === id + color) {
-            let newAmount = curElem.amount + amount;
+    if (existingProduct) {
+      let updatedProduct = state.cart.map((curElem) => {
+        if (curElem.id === id + color) {
+          let newAmount = curElem.amount + amount;
 
-            if (newAmount >= curElem.max) {
-              newAmount = curElem.max;
-            }
-            return {
-              ...curElem,
-              amount: newAmount,
-            };
-          } else {
-            return curElem;
+          if (newAmount >= curElem.max) {
+            newAmount = curElem.max;
           }
-        });
-        return {
-          ...state,
-          cart: updatedProduct,
-        };
-      } else {
-        let cartProduct = {
-          id: id + color,
-          name: product.name,
-          color,
-          amount,
-          image: product.image[0].url,
-          price: product.price,
-          max: product.stock,
-        };
+          return {
+            ...curElem,
+            amount: newAmount,
+          };
+        } else {
+          return curElem;
+        }
+      });
+      return {
+        ...state,
+        cart: updatedProduct,
+      };
+    } else {
+      let cartProduct = {
+        id: id + color,
+        name: product.name,
+        color,
+        amount,
+        image: product.image[0].url,
+        price: product.price,
+        max: product.stock,
+      };
 
-        return {
-          ...state,
-          cart: [...state.cart, cartProduct],
-        };
-      }
+      return {
+        ...state,
+        cart: [...state.cart, cartProduct],
+      };
     }
-  };
+  }
 
   // to set the increment and decrement
   if (action.type === "SET_DECREMENT") {
@@ -110,25 +108,26 @@ const cartReducer = (state, action) => {
   //   if (!state.cart) {
   //     return state; // Return the current state if cart is null
   //   }
-
+  
   //   let updatedItemVal = state.cart.reduce((initialVal, curElem) => {
   //     let { amount } = curElem;
-
+  
   //     initialVal = initialVal + amount;
   //     return initialVal;
   //   }, 0);
-
+  
   //   return {
   //     ...state,
   //     total_item: updatedItemVal,
   //   };
   // }
+  
 
   // if (action.type === "CART_TOTAL_PRICE") {
   //   if (!state.cart) {
   //     return state; // Return the current state if cart is null
   //   }
-
+    
   //   let total_price = state.cart.reduce((initialVal, curElem) => {
   //     let { price, amount } = curElem;
 
@@ -147,7 +146,7 @@ const cartReducer = (state, action) => {
 
   if (action.type === "CART_ITEM_PRICE_TOTAL") {
     if (!state.cart) {
-      return state;
+      return state; 
     }
 
     let { total_item, total_price } = state.cart.reduce(
