@@ -207,6 +207,11 @@ const Nav = () => {
             </NavLink>
           </li>
 
+          <li>
+          {isAuthenticated && <img src={user.picture} alt={user.name} />}
+          {/* {isAuthenticated && <p>{user.name}</p>} */}
+          </li>
+
           {isAuthenticated ? (
             <li>
               <Button
@@ -222,20 +227,6 @@ const Nav = () => {
               <Button onClick={() => loginWithRedirect()}>Log In</Button>
             </li>
           )}
-
-          {/* <li>
-            <Button onClick={() => loginWithRedirect()}>Log In</Button>
-          </li>
-
-          <li>
-            <Button
-              onClick={() =>
-                logout({ logoutParams: { returnTo: window.location.origin } })
-              }
-            >
-              Log Out
-            </Button>
-          </li> */}
 
           <li>
             <NavLink to="/cart" className="navbar-link cart-trolley--link">

@@ -14,9 +14,7 @@ root.render(
   <Auth0Provider
     domain="dev-iap1edtrf282jdt1.us.auth0.com"
     clientId="0nmkdUdCe07JSxtigUxdM59aPqVBPncO"
-    authorizationParams={{
-      redirect_uri: window.location.origin,
-    }}
+    redirectUri={window.location.origin}
   >
     <AppProvider>
       <FilterContextProvider>
